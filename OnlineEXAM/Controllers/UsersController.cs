@@ -100,6 +100,11 @@ namespace OnlineEXAM.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult Login(User user)
+        {
+
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {
