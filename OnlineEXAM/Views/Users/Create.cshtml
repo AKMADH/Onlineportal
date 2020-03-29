@@ -17,6 +17,10 @@
 <div class="form-horizontal">
     <h4>User</h4>
     <hr />
+    @if (ViewBag.errormsg != null)
+    {
+        <p class="alert-danger">@ViewBag.errormsg</p>
+    }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -29,7 +33,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ProfilImage, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            
+
             <label for="file">Upload Image:</label>
             <input type="file" name="file" id="file" style="width: 100%;" />
             @Html.ValidationMessageFor(model => model.ProfilImage, "", new { @class = "text-danger" })

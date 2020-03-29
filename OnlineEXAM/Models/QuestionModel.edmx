@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="onlineTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="maincateogry">
+          <Key>
+            <PropertyRef Name="MainCateogryID" />
+          </Key>
+          <Property Name="MainCateogryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainCateogryName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionSet">
+          <Key>
+            <PropertyRef Name="Question_ID" />
+          </Key>
+          <Property Name="Question_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Option1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Option2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Option3" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Option4" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="correctOption" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MainCateogryID" Type="int" Nullable="false" />
+          <Property Name="Subject_id" Type="int" Nullable="false" />
+          <Property Name="Topic_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_id" />
+          </Key>
+          <Property Name="Subject_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MainCateogryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Topic_id" />
+          </Key>
+          <Property Name="Topic_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MainCateogryID" Type="int" Nullable="false" />
+          <Property Name="Subject_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="ProfilImage" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Mobile" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="fk_group">
+          <End Role="maincateogry" Type="Self.maincateogry" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maincateogry">
+              <PropertyRef Name="MainCateogryID" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="MainCateogryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_maincat">
+          <End Role="maincateogry" Type="Self.maincateogry" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maincateogry">
+              <PropertyRef Name="MainCateogryID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="MainCateogryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_maincateogry">
+          <End Role="maincateogry" Type="Self.maincateogry" Multiplicity="1" />
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maincateogry">
+              <PropertyRef Name="MainCateogryID" />
+            </Principal>
+            <Dependent Role="QuestionSet">
+              <PropertyRef Name="MainCateogryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sub">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_id" />
+            </Principal>
+            <Dependent Role="QuestionSet">
+              <PropertyRef Name="Subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="Subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Topic_id" />
+            </Principal>
+            <Dependent Role="QuestionSet">
+              <PropertyRef Name="Topic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="onlineTestModelStoreContainer">
+          <EntitySet Name="maincateogry" EntityType="Self.maincateogry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionSet" EntityType="Self.QuestionSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_group" Association="Self.fk_group">
+            <End Role="maincateogry" EntitySet="maincateogry" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="fk_maincat" Association="Self.fk_maincat">
+            <End Role="maincateogry" EntitySet="maincateogry" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
+          <AssociationSet Name="fk_maincateogry" Association="Self.fk_maincateogry">
+            <End Role="maincateogry" EntitySet="maincateogry" />
+            <End Role="QuestionSet" EntitySet="QuestionSet" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sub" Association="Self.fk_sub">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="QuestionSet" EntitySet="QuestionSet" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subject" Association="Self.fk_subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
+          <AssociationSet Name="fk_topic" Association="Self.fk_topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="QuestionSet" EntitySet="QuestionSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="onlineTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="maincateogry">
+          <Key>
+            <PropertyRef Name="MainCateogryID" />
+          </Key>
+          <Property Name="MainCateogryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainCateogryName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Subjects" Relationship="Self.fk_group" FromRole="maincateogry" ToRole="Subject" />
+          <NavigationProperty Name="Topics" Relationship="Self.fk_maincat" FromRole="maincateogry" ToRole="Topic" />
+          <NavigationProperty Name="QuestionSets" Relationship="Self.fk_maincateogry" FromRole="maincateogry" ToRole="QuestionSet" />
+        </EntityType>
+        <EntityType Name="QuestionSet">
+          <Key>
+            <PropertyRef Name="Question_ID" />
+          </Key>
+          <Property Name="Question_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correctOption" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MainCateogryID" Type="Int32" Nullable="false" />
+          <Property Name="Subject_id" Type="Int32" Nullable="false" />
+          <Property Name="Topic_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="maincateogry" Relationship="Self.fk_maincateogry" FromRole="QuestionSet" ToRole="maincateogry" />
+          <NavigationProperty Name="Subject" Relationship="Self.fk_sub" FromRole="QuestionSet" ToRole="Subject" />
+          <NavigationProperty Name="Topic" Relationship="Self.fk_topic" FromRole="QuestionSet" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_id" />
+          </Key>
+          <Property Name="Subject_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MainCateogryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="maincateogry" Relationship="Self.fk_group" FromRole="Subject" ToRole="maincateogry" />
+          <NavigationProperty Name="QuestionSets" Relationship="Self.fk_sub" FromRole="Subject" ToRole="QuestionSet" />
+          <NavigationProperty Name="Topics" Relationship="Self.fk_subject" FromRole="Subject" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Topic_id" />
+          </Key>
+          <Property Name="Topic_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MainCateogryID" Type="Int32" Nullable="false" />
+          <Property Name="Subject_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="maincateogry" Relationship="Self.fk_maincat" FromRole="Topic" ToRole="maincateogry" />
+          <NavigationProperty Name="QuestionSets" Relationship="Self.fk_topic" FromRole="Topic" ToRole="QuestionSet" />
+          <NavigationProperty Name="Subject" Relationship="Self.fk_subject" FromRole="Topic" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProfilImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_group">
+          <End Role="maincateogry" Type="Self.maincateogry" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maincateogry">
+              <PropertyRef Name="MainCateogryID" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="MainCateogryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_maincat">
+          <End Role="maincateogry" Type="Self.maincateogry" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maincateogry">
+              <PropertyRef Name="MainCateogryID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="MainCateogryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_maincateogry">
+          <End Role="maincateogry" Type="Self.maincateogry" Multiplicity="1" />
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maincateogry">
+              <PropertyRef Name="MainCateogryID" />
+            </Principal>
+            <Dependent Role="QuestionSet">
+              <PropertyRef Name="MainCateogryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sub">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_id" />
+            </Principal>
+            <Dependent Role="QuestionSet">
+              <PropertyRef Name="Subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1" />
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Topic_id" />
+            </Principal>
+            <Dependent Role="QuestionSet">
+              <PropertyRef Name="Topic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="Subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="onlineTestEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="maincateogries" EntityType="Self.maincateogry" />
+          <EntitySet Name="QuestionSets" EntityType="Self.QuestionSet" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="fk_group" Association="Self.fk_group">
+            <End Role="maincateogry" EntitySet="maincateogries" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="fk_maincat" Association="Self.fk_maincat">
+            <End Role="maincateogry" EntitySet="maincateogries" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="fk_maincateogry" Association="Self.fk_maincateogry">
+            <End Role="maincateogry" EntitySet="maincateogries" />
+            <End Role="QuestionSet" EntitySet="QuestionSets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sub" Association="Self.fk_sub">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="QuestionSet" EntitySet="QuestionSets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_topic" Association="Self.fk_topic">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="QuestionSet" EntitySet="QuestionSets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subject" Association="Self.fk_subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="onlineTestModelStoreContainer" CdmEntityContainer="onlineTestEntities1">
+          <EntitySetMapping Name="maincateogries">
+            <EntityTypeMapping TypeName="onlineTestModel.maincateogry">
+              <MappingFragment StoreEntitySet="maincateogry">
+                <ScalarProperty Name="MainCateogryID" ColumnName="MainCateogryID" />
+                <ScalarProperty Name="MainCateogryName" ColumnName="MainCateogryName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionSets">
+            <EntityTypeMapping TypeName="onlineTestModel.QuestionSet">
+              <MappingFragment StoreEntitySet="QuestionSet">
+                <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="correctOption" ColumnName="correctOption" />
+                <ScalarProperty Name="MainCateogryID" ColumnName="MainCateogryID" />
+                <ScalarProperty Name="Subject_id" ColumnName="Subject_id" />
+                <ScalarProperty Name="Topic_id" ColumnName="Topic_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="onlineTestModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="Subject_id" ColumnName="Subject_id" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="MainCateogryID" ColumnName="MainCateogryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="onlineTestModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="Topic_id" ColumnName="Topic_id" />
+                <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+                <ScalarProperty Name="MainCateogryID" ColumnName="MainCateogryID" />
+                <ScalarProperty Name="Subject_id" ColumnName="Subject_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="onlineTestModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ProfilImage" ColumnName="ProfilImage" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

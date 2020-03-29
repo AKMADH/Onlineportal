@@ -11,8 +11,7 @@ namespace OnlineEXAM.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class User
     {
         public int UserID { get; set; }

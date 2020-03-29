@@ -141,6 +141,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\MaincateogryController.cs" />
+    <Compile Include="Controllers\Admin\SubjectsController.cs" />
+    <Compile Include="Controllers\Admin\TopicsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -160,8 +163,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\maincateogry.cs">
+      <DependentUpon>QuestionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuestionModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuestionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuestionModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionSet.cs">
+      <DependentUpon>QuestionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>QuestionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Topic.cs">
+      <DependentUpon>QuestionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>dbModel.tt</DependentUpon>
+      <DependentUpon>QuestionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +200,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -184,6 +215,16 @@
       <DependentUpon>dbModel.edmx</DependentUpon>
       <LastGenOutput>dbModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\QuestionModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuestionModel.edmx</DependentUpon>
+      <LastGenOutput>QuestionModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\QuestionModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuestionModel.edmx</DependentUpon>
+      <LastGenOutput>QuestionModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\dbModel.edmx">
@@ -192,6 +233,13 @@
     </EntityDeploy>
     <Content Include="Models\dbModel.edmx.diagram">
       <DependentUpon>dbModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\QuestionModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuestionModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QuestionModel.edmx.diagram">
+      <DependentUpon>QuestionModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -220,6 +268,23 @@
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\UserDashBoard.cshtml" />
+    <Content Include="Views\Maincateogry\Create.cshtml" />
+    <Content Include="Views\Maincateogry\Delete.cshtml" />
+    <Content Include="Views\Maincateogry\Details.cshtml" />
+    <Content Include="Views\Maincateogry\Edit.cshtml" />
+    <Content Include="Views\Maincateogry\Index.cshtml" />
+    <Content Include="Views\Subjects\Create.cshtml" />
+    <Content Include="Views\Subjects\Delete.cshtml" />
+    <Content Include="Views\Subjects\Details.cshtml" />
+    <Content Include="Views\Subjects\Edit.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Topics\Create.cshtml" />
+    <Content Include="Views\Topics\Delete.cshtml" />
+    <Content Include="Views\Topics\Details.cshtml" />
+    <Content Include="Views\Topics\Edit.cshtml" />
+    <Content Include="Views\Topics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
