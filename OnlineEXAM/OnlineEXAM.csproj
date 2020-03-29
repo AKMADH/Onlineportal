@@ -142,8 +142,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\MaincateogryController.cs" />
+    <Compile Include="Controllers\Admin\QuestionSetsController.cs" />
     <Compile Include="Controllers\Admin\SubjectsController.cs" />
     <Compile Include="Controllers\Admin\TopicsController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,6 +288,12 @@
     <Content Include="Views\Topics\Details.cshtml" />
     <Content Include="Views\Topics\Edit.cshtml" />
     <Content Include="Views\Topics\Index.cshtml" />
+    <Content Include="Views\QuestionSets\Create.cshtml" />
+    <Content Include="Views\QuestionSets\Delete.cshtml" />
+    <Content Include="Views\QuestionSets\Details.cshtml" />
+    <Content Include="Views\QuestionSets\Edit.cshtml" />
+    <Content Include="Views\QuestionSets\Index.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

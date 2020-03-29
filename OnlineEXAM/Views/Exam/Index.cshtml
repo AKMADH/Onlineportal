@@ -1,0 +1,41 @@
+﻿@model IEnumerable<OnlineEXAM.Models.QuestionSet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+
+@foreach (var item in Model)
+{
+
+    <p>
+        @Html.DisplayFor(modelItem => item.Question)
+    </p>
+    <hr/>
+<br/>
+    <ul>
+        @Html.DisplayFor(modelItem => item.Option1)
+    </ul>
+    <br/>
+    <ul>
+        <span>
+            @Html.DisplayFor(modelItem => item.Option2,new { style="font-size:30px"})
+        </span>
+    </ul>
+    <br/>
+    <ul>
+        @Html.DisplayFor(modelItem => item.Option3)
+    </ul>
+    <br/>
+    <ul>
+        @Html.DisplayFor(modelItem => item.Option4)
+    </ul>
+    <br/>
+
+}
+
+

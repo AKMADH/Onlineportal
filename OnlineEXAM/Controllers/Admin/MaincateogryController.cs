@@ -41,15 +41,13 @@ namespace OnlineEXAM.Controllers.Admin
             return View();
         }
 
-        // POST: Maincateogry/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MainCateogryID,MainCateogryName,CreatedDate")] maincateogry maincateogry)
         {
             if (ModelState.IsValid)
             {
+                maincateogry.CreatedDate = DateTime.Now;
                 db.maincateogries.Add(maincateogry);
                 db.SaveChanges();
                 return RedirectToAction("Index");
